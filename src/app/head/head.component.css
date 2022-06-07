@@ -1,0 +1,135 @@
+.background {
+    height: 300px;
+    background-size: cover;
+}
+.head-ctn {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    color: white;
+    column-gap: 300px;
+    justify-content: center;
+    top: 20%;
+}
+.head-ctn h1 {
+    letter-spacing: 15px;
+}
+.icon {
+    position: relative;
+    top: 28px;
+    cursor: pointer;
+}
+.todoinput {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 18px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: "Outfit", sans-serif;
+    font-size: 20px;
+    padding-left: 50px;
+}
+mat-label {
+    color: white;
+}
+
+form {
+    position: absolute;
+    left: 38%;
+    top: 25%;
+}
+
+.add-btn {
+    cursor: pointer;
+    color: white;
+    font-family: "Outfit";
+    border: none;
+    border-radius: 50%;
+    height: 35px;
+}
+input:focus {
+    outline: none;
+}
+.tab-ctn {
+    margin: 30px 0px;
+}
+#todo-ctn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 34%;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 10px;
+}
+#active-ctn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 34%;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 10px;
+}
+#done-ctn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 34%;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 10px;
+}
+.todo-flex-ctn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.mat-tab-label {
+    font-size: 25px;
+    font-family: "Outfit";
+    font-weight: bolder;
+}
+.matInput {
+    border-color: white;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white;
+}
+input.mat-input-element {
+    color: rgb(219, 209, 209);
+}
+mat-icon {
+    margin-right: 0px !important;
+    vertical-align: middle;
+}
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.mini-fab {
+    margin: 20px;
+}
+span {
+    margin: 1.3px;
+}
+.btn-flex {
+    display: flex;
+    column-gap: 10px;
+}
+
+.text {
+    text-align: center;
+    font-weight: bold;
+    margin: 30px;
+    letter-spacing: 10px;
+}

@@ -1,0 +1,102 @@
+<div class="darkMode" [class.alternative]='darkMode'>
+    <div class="background"
+        [ngStyle]="{'background-image' : darkMode ? 'url(./../../assets/images/bg-desktop-dark.jpg)' : 'url(./../../assets/images/bg-desktop-light.jpg)'}">
+
+        <div class="head-ctn">
+            <h1>TODO</h1>
+            <div class="icon" (click)="themeSwitch()" *ngIf="darkMode == false"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="26" height="26">
+                    <path fill="#FFF" fill-rule="evenodd"
+                        d="M13 0c.81 0 1.603.074 2.373.216C10.593 1.199 7 5.43 7 10.5 7 16.299 11.701 21 17.5 21c2.996 0 5.7-1.255 7.613-3.268C23.22 22.572 18.51 26 13 26 5.82 26 0 20.18 0 13S5.82 0 13 0z" />
+                </svg></div>
+            <div class="icon" (click)="themeSwitch()" *ngIf="darkMode == true"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="26" height="26">
+                    <path fill="#FFF" fill-rule="evenodd"
+                        d="M13 21a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-5.657-2.343a1 1 0 010 1.414l-2.121 2.121a1 1 0 01-1.414-1.414l2.12-2.121a1 1 0 011.415 0zm12.728 0l2.121 2.121a1 1 0 01-1.414 1.414l-2.121-2.12a1 1 0 011.414-1.415zM13 8a5 5 0 110 10 5 5 0 010-10zm12 4a1 1 0 110 2h-3a1 1 0 110-2h3zM4 12a1 1 0 110 2H1a1 1 0 110-2h3zm18.192-8.192a1 1 0 010 1.414l-2.12 2.121a1 1 0 01-1.415-1.414l2.121-2.121a1 1 0 011.414 0zm-16.97 0l2.121 2.12A1 1 0 015.93 7.344L3.808 5.222a1 1 0 011.414-1.414zM13 0a1 1 0 011 1v3a1 1 0 11-2 0V1a1 1 0 011-1z" />
+                </svg></div>
+        </div>
+        <form class="input" (submit)="addTodo()">
+          
+            <mat-form-field appearance="outline" style="width: 300px;" (submit)="addTodo()">
+                <mat-label>New Task</mat-label>
+                <input type="text" matInput placeholder="Create a todo here..." [(ngModel)]="inputTodo"
+                    [ngModelOptions]="{standalone: true}">
+                <button mat-mini-fab color="primary" type="submit" matSuffix mat-icon-button (submit)="addTodo()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </mat-form-field>
+
+        </form>
+
+    </div>
+
+<div class="mat-tab">
+    <mat-tab-group mat-stretch-tabs cdkDropListGroup [color]="'primary'">
+
+        <mat-tab label="All">
+            <div class="text" [ngStyle]="{'color' : darkMode ? 'white' : 'black'}" *ngIf="this.todos.length !=0">Move
+                items in the list with drap and drop</div>
+            <div class="text" *ngIf="this.todos.length == 0" [ngStyle]="{'color' : darkMode ? 'white' : 'black'}">There are no tasks</div>
+            <div class="tab-ctn" cdkDropList #todoList="cdkDropList" [cdkDropListData]="todos" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="todo-flex-ctn" *ngFor="let todo of todos; let i = index" cdkDrag>
+                    <mat-card id="todo-ctn">
+                        <div [ngStyle]="{'text-decoration' : todo.completed ? 'line-through' : ''}">{{todo.content}}
+                        </div>
+                        <div class="btn-flex">
+                            <button mat-mini-fab color="primary" class="mat-button" (click)="completedFunction(todo)"
+                                class="mini-fab" [ngStyle]="{'opacity' : todo.completed ? '1' : '0.3'}">
+                                <mat-icon>check</mat-icon>
+                            </button>
+                            <button mat-mini-fab color="warn" class="mat-button" (click)="delete(i)" class="mini-fab">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-tab>
+        
+        <mat-tab label="Active">
+            <div class="text" [ngStyle]="{'color' : darkMode ? 'white' : 'black'}" *ngIf="this.active.length !=0">Move
+                items in the list with drap and drop</div>
+            <div class="text" *ngIf="this.active.length == 0" [ngStyle]="{'color' : darkMode ? 'white' : 'black'}">There are no active tasks</div>
+            <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="active" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div *ngFor="let things of active; let j = index" class="todo-flex-ctn" cdkDrag>
+                    <mat-card id="active-ctn">
+                        <div>
+                            {{things.content}}
+                        </div>
+                        <button mat-mini-fab color="warn" class="mat-button" (click)="delete(j)" class="mini-fab">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Completed">
+            <div class="text" [ngStyle]="{'color' : darkMode ? 'white' : 'black'}" *ngIf="this.done.length !=0">Move
+                items in the list with drap and drop</div>
+            <div class="text" *ngIf="this.done.length == 0" [ngStyle]="{'color' : darkMode ? 'white' : 'black'}">There are no completed tasks</div>
+
+            <div class="tab-ctn" cdkDropList #todoList="cdkDropList" [cdkDropListData]="done" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div *ngFor="let stuff of done; let i = index" class="todo-flex-ctn" cdkDrag>
+                    <mat-card id="done-ctn">
+                        <div>
+                            {{stuff}}
+                        </div>
+                        <div class="btn-flex">
+                            <button mat-mini-fab color="warn" class="mat-button" (click)="deleteC(i)" class="mini-fab">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    </div>
+</div>

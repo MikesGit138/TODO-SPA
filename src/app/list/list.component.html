@@ -1,0 +1,69 @@
+<div class="mat-tab">
+    <mat-tab-group mat-stretch-tabs cdkDropListGroup  [color]="'primary'">
+
+        <mat-tab label="All">
+            <div class="text" [ngStyle]="{'color' : darkMode ? 'white' : 'black'}" *ngIf="this.todos.length !=0">Move
+                items in the list with drap and drop</div>
+            <div class="text" *ngIf="this.todos.length == 0" [ngStyle]="{'color' : darkMode ? 'white' : 'black'}">There are no tasks</div>
+            <div class="tab-ctn" cdkDropList #todoList="cdkDropList" [cdkDropListData]="todos" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="todo-flex-ctn" *ngFor="let todo of todos; let i = index" cdkDrag>
+                    <mat-card id="todo-ctn">
+                        <div [ngStyle]="{'text-decoration' : todo.completed ? 'line-through' : ''}">{{todo.content}}
+                        </div>
+                        <div class="btn-flex">
+                            <button mat-mini-fab color="primary" class="mat-button" (click)="completedFunction(todo)"
+                                class="mini-fab" [ngStyle]="{'opacity' : todo.completed ? '1' : '0.3'}">
+                                <mat-icon>check</mat-icon>
+                            </button>
+                            <button mat-mini-fab color="warn" class="mat-button" (click)="delete(i)" class="mini-fab">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-tab>
+        
+        <mat-tab label="Active">
+            <div class="text" [ngStyle]="{'color' : darkMode ? 'white' : 'black'}" *ngIf="this.active.length !=0">Move
+                items in the list with drap and drop</div>
+            <div class="text" *ngIf="this.active.length == 0" [ngStyle]="{'color' : darkMode ? 'white' : 'black'}">There are no active tasks</div>
+            <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="active" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div *ngFor="let things of active; let j = index" class="todo-flex-ctn" cdkDrag>
+                    <mat-card id="active-ctn">
+                        <div>
+                            {{things.content}}
+                        </div>
+                        <button mat-mini-fab color="warn" class="mat-button" (click)="delete(j)" class="mini-fab">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Completed">
+            <div class="text" [ngStyle]="{'color' : darkMode ? 'white' : 'black'}" *ngIf="this.done.length !=0">Move
+                items in the list with drap and drop</div>
+            <div class="text" *ngIf="this.done.length == 0" [ngStyle]="{'color' : darkMode ? 'white' : 'black'}">There are no completed tasks</div>
+
+            <div class="tab-ctn" cdkDropList #todoList="cdkDropList" [cdkDropListData]="done" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div *ngFor="let stuff of done; let i = index" class="todo-flex-ctn" cdkDrag>
+                    <mat-card id="done-ctn">
+                        <div>
+                            {{stuff}}
+                        </div>
+                        <div class="btn-flex">
+                            <button mat-mini-fab color="warn" class="mat-button" (click)="deleteC(i)" class="mini-fab">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    </div>
