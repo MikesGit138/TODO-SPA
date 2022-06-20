@@ -19,7 +19,7 @@
     top: 28px;
     cursor: pointer;
 }
-.todoinput {
+/* .todoinput {
     position: absolute;
     top: 30%;
     left: 50%;
@@ -32,7 +32,7 @@
     font-family: "Outfit", sans-serif;
     font-size: 20px;
     padding-left: 50px;
-}
+} */
 mat-label {
     color: white;
 }
@@ -132,4 +132,22 @@ span {
     font-weight: bold;
     margin: 30px;
     letter-spacing: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    #todo-ctn{
+        width: 90%;
+    }
+    .text{
+        line-height: 35px;
+        letter-spacing: 5px;
+    }
+    .head-ctn{
+        column-gap: 100px;
+    }
+    form {
+        display: flex;
+    position: sticky;
+    justify-content: center;
+    }
 }
